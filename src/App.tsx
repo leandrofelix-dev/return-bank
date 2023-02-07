@@ -1,11 +1,13 @@
-import { Home } from './screens/Home'
-import { getSaudacao, saudacao } from './lib/dayJs'
+//import { Home } from './screens/Home'
+//import { getSaudacao, saudacao } from './lib/dayJs'
+import { Menu } from './screens/Menu'
 
 function App() {
-  getSaudacao()
+  //getSaudacao()
 
   return (
-    <Home msg={`Olá! ${saudacao}`} />
+    //<Home msg={`Olá! ${saudacao}`} />
+    <Menu />
   )
 }
 export default App
