@@ -3,13 +3,13 @@ import blurTwo from '../assets/blur2.svg'
 
 export function Blur() {
   return (
-    <div className="w-screen h-screen flex absolute z-0">
-      <div className="h-full absolute flex">
-        <img src={blurOne} alt="Blur" />
+    <div className="h-screen w-screen flex fixed z-0">
+      <div className="h-full left-0">
+        <img src={blurOne} alt="Blur" className="absolute bottom-0 left-0"/>
       </div>
 
-      <div className="absolute right-0">
-        <img src={blurTwo} alt="Blur" />
+      <div className="h-screen w-screen flex fixed z-0">
+        <img src={blurTwo} alt="Blur" className="absolute top-0 right-0"/>
       </div>
     </div>
   )

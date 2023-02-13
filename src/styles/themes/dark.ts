@@ -4,7 +4,7 @@ export default {
   colors: {
     primary: '#D69DDF',
     secundary: '#D69DDF',
-    background: '#111111',
+    background: '#000000',
     text: '#fff'
   },
   };

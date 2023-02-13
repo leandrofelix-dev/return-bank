@@ -2,13 +2,13 @@ import '../styles/global.css'
 import logoImage from '../assets/logo.svg'
 import card from '../assets/card.svg'
 import { Blur } from '../components/Blur'
-import {Menu} from './Menu'
+import { Menu } from './Menu'
 
 interface IHomeProps {
   msg: string
 }
 
-export function Home({ msg }: IHomeProps) {
+export function Rest({ msg }: IHomeProps) {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <Blur />
@@ -25,7 +25,7 @@ export function Home({ msg }: IHomeProps) {
         <button
           type="button"
         >
-          <img src={card} alt="card" /> 
+          <img src={card} alt="card" />
         </button>
 
         <div className="font-bold  text-3xl text-slate-100">
