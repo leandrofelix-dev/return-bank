@@ -13,7 +13,6 @@ import light from '../styles/themes/light'
 import dark from '../styles/themes/dark'
 import api from '../services/api'
 import { accountUrl } from '../repositories/menuQuery'
-import { FormatMoneyParse } from 'format-money-js'
 import { fm } from '../lib/formatMoney'
 
 export function Menu() {
