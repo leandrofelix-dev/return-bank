@@ -4,6 +4,7 @@ import { ThemeContext } from 'styled-components';
 import { shade } from 'polished'
 
 import logoImage from '../assets/logo.svg'
+import { Link } from 'react-router-dom';
 
 interface Props {
   toggleTheme(): void;
@@ -15,7 +16,9 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
   return (
     <div className="w-full px-36 flex justify-between z-10">
       <div>
-        <img className='w-80' src={logoImage} alt='logo' />
+        <Link to={'/rest'}>
+          <img className='w-80' src={logoImage} alt='logo' />
+        </Link>
       </div>
       <div className="self-center flex">
       <Switch

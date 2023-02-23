@@ -1,16 +1,12 @@
-import { Rest } from './screens/Rest'
-import { Menu } from './screens/Menu'
-import { getSaudacao, saudacao } from './lib/dayJs'
-
-export const audio = new Audio('/assets/sounds/beep.mp3')
+import { Outlet } from 'react-router-dom'
+import { Footer } from './components/Footer'
 
 function App() {
-  getSaudacao()
   return (
-    <>
-      {/* <Rest msg={`Olá! ${saudacao}`} /> */}
-      <Menu />
-    </>
+    <div className="app">
+      <Outlet />
+      <Footer />
+    </div>
   )
 }
 export default App

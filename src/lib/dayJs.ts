@@ -4,7 +4,7 @@ const hour: number = dayjs().hour()
 
 export let saudacao: saudacaoType
 
-export function getSaudacao() {
+function getSaudacao() {
   if (hour >= 6 && hour < 12) {
     saudacao = 'Bom dia⛅'
   }
@@ -15,3 +15,4 @@ export function getSaudacao() {
     saudacao = 'Boa noite🌙'
   }
 }
+export const saudacaoText = getSaudacao()

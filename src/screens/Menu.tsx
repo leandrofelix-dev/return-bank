@@ -1,10 +1,9 @@
 import '../styles/global.css'
 
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Blur } from '../components/Blur'
 import { Buttom } from '../components/Buttom'
-import { ButtomAlt } from '../components/ButtomAlt'
 import { ThemeProvider } from 'styled-components'
 
 import Header from '../components/Header'
@@ -14,6 +13,7 @@ import dark from '../styles/themes/dark'
 import api from '../services/api'
 import { accountUrl } from '../repositories/menuQuery'
 import { fm } from '../lib/formatMoney'
+import { Link } from 'react-router-dom'
 
 export function Menu() {
   const [theme, setTheme] = useState(dark)
@@ -73,16 +73,18 @@ export function Menu() {
                       <b>Atenção:</b> Selecione um botão ao lado para realizar operações em sua conta bancária ✅
                     </p>
                   </div>
-
                 </div>
-                <div className="grid grid-rows-2 grid-cols-2 gap-6 font-poppins">
-                  <div><Buttom text="SAQUE" logo="../../src/assets/saque.svg" /></div>
-                  <div><Buttom text="DEPÓSITO" logo="../../src/assets/deposito.svg" /></div>
-                  <div><Buttom text="TRANSFERÊNCIA" logo="../../src/assets/transferencia.svg" /></div>
-                  <div><ButtomAlt text="VER MAIS" logo="../../src/assets/mais.svg" /></div>
-                </div>
-              </div>
+                  <div className="grid grid-rows-2 grid-cols-2 gap-6 font-poppins">
+                    <Link to={"/withdrawal"}>
+                      <Buttom text="SAQUE" logo="../src/assets/saque.svg" type='primary'/></Link>
+                    <Link to={"/deposit"}>
+                      <Buttom text="DEPÓSITO" logo="../src/assets/deposito.svg" type='primary'/></Link>
+                    <Link to={"/transfer"}>
+                      <Buttom text="TRANSFERÊNCIA" logo="../src/assets/transferencia.svg" type='primary'/></Link>
+                    <Link to={"/"}><Buttom text="VER MAIS" logo="../src/assets/mais.svg" type='secondary'/></Link>
+                  </div>
             </div>
+        </div>
         </div>
     </ThemeProvider >
   )
