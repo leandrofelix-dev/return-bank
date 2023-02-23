@@ -1,6 +1,7 @@
 import '../styles/global.css'
 
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Blur } from '../components/Blur'
 import { Buttom } from '../components/Buttom'
@@ -10,21 +11,29 @@ import Header from '../components/Header'
 import GlobalStyle from '../styles/global'
 import light from '../styles/themes/light'
 import dark from '../styles/themes/dark'
-import api from '../services/api'
+import api from '../api/api'
+
 import { accountUrl } from '../repositories/menuQuery'
 import { fm } from '../lib/formatMoney'
 import { Link } from 'react-router-dom'
 
-export function Menu() {
+export function Home() {
   const [theme, setTheme] = useState(dark)
   const [name, setName] = useState('John Doe')
   const [cash, setCash]: any = useState('R$ 0,00')
+
+  const navigate = useNavigate()
 
   const toggleTheme = () => {
     setTheme(theme.title == 'light' ? dark : light)
   }
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
+
+    if (!token) { navigate('/login')}
+
+
     api.get(accountUrl)
       .then((response) => {
         setCash(
