@@ -28,17 +28,16 @@ export function Home() {
     setTheme(theme.title == 'light' ? dark : light)
   }
 
-  useEffect(() => {
     const token = localStorage.getItem('token')
 
     if (!token) { navigate('/login')}
-
 
     api.get(accountUrl)
       .then((response) => {
         setCash(
           fm.from(response.data[0].cash)
         )
+
         const userId = response.data[0].userId
 
         api.get(`${api.defaults.baseURL}/user/${userId}`)
@@ -47,7 +46,6 @@ export function Home() {
           })
           .catch((err) => { console.log(err) })
       }).catch((err) => { console.log(err) })
-  }, [])
 
   return (
     <ThemeProvider theme={theme} >

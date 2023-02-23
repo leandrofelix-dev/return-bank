@@ -23,6 +23,7 @@ const router = createBrowserRouter([
       { path: 'rest', element: <Rest msg={'Boa noite'} /> },
       { path: 'user/:id', element: <User /> },
       { path: 'login', element: <Login /> },
+      { path: 'home', element: <Home /> },
       { path: 'deposit', element: <Deposit /> },
       { path: 'transfer', element: <Transfer /> },
       { path: 'withdrawal', element: <Withdrawal /> }

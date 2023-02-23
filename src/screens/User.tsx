@@ -1,15 +1,23 @@
+import { useState } from 'react';
+
 import api from "../api/api"
 
 export function User() {
-  const id = "d4b8eb1b-81be-4c15-9c48-658ce684147a"
+  const id = window.location.href.split('/')[4]
 
-  api.get(`/user/${id}`)
-    .then((response: any) => {
-      console.log(response.data)
-    })
-    .catch((err) => { console.log(err) })
+  const [name, setName] = useState('John Doe')
+  console.log(`${api.defaults.baseURL}/user/${id}`)
+
+  api.get(`${api.defaults.baseURL}/user/${id}`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+  })
+      .then((response) => {
+        setName(response.data)
+        console.log(response)
+      })
+      .catch((err) => { console.log(err) })
 
   return (
-    <h1></h1>
+    <h3>{`${name}`}</h3>
   )
 }

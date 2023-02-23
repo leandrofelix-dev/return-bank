@@ -34,7 +34,7 @@ export function Login() {
     .then(function (res) {
       const token = res.data.token
       localStorage.setItem('token', token)
-        navigate(`/user/${id}`)
+      navigate(`/user/${id}`)
       })
       .catch(function (err) { console.log(err) })
   }
