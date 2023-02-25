@@ -1,15 +1,15 @@
-//Importação do Formato do Tema
+// Importação do Formato do Tema
 import 'styled-components'
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    title: string;
+    title: string
 
     colors: {
-      primary:string;
-      secundary:string;
-      background: string;
-      text: string;
-    },
+      primary: string
+      secundary: string
+      background: string
+      text: string
+    }
   }
 }

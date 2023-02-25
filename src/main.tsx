@@ -7,7 +7,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Rest } from './screens/Rest'
 import { Home } from './screens/Home'
 import { Error } from './screens/Error'
-import { Login } from './screens/Login'
 
 import { Deposit } from './screens/Deposit'
 import { Transfer } from './screens/Transfer'
@@ -20,19 +19,18 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <Error />,
     children: [
-      { path: 'rest', element: <Rest msg={'Boa noite'} /> },
+      { path: '/', element: <Rest msg={'Boa noite 🌙'} /> },
       { path: 'user/:id', element: <User /> },
-      { path: 'login', element: <Login /> },
-      { path: 'home', element: <Home /> },
+      { path: 'account/:id', element: <Home /> },
       { path: 'deposit', element: <Deposit /> },
       { path: 'transfer', element: <Transfer /> },
-      { path: 'withdrawal', element: <Withdrawal /> }
-    ]
-  }
+      { path: 'withdrawal', element: <Withdrawal /> },
+    ],
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 )

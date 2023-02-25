@@ -1,5 +1,3 @@
 export function Deposit() {
-  return (
-    <h1>Deposit</h1>
-  )
+  return <h1>Deposit</h1>
 }

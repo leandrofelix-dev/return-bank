@@ -1,9 +1,10 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom'
 
 export function Error() {
   return (
     <div className="error">
-      <Navigate to="/login"/>
+      <h2>caiu aqui</h2>
+      <Navigate to="/" />
     </div>
   )
 }

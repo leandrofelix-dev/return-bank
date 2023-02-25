@@ -1,5 +1,3 @@
 export function Withdrawal() {
-  return (
-    <h1>Withdrawal</h1>
-  )
+  return <h1>Withdrawal</h1>
 }

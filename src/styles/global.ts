@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-//Tema Global
+import { createGlobalStyle } from 'styled-components'
+// Tema Global
 export default createGlobalStyle`
  * {
     margin: 0;
@@ -7,8 +7,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background: ${props => props.theme.colors.background};
-    color: ${props => props.theme.colors.text};
+    background: ${(props) => props.theme.colors.background};
+    color: ${(props) => props.theme.colors.text};
 
   }
-`;
+`

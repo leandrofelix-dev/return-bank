@@ -1,7 +1,7 @@
 import '../styles/global.css'
 import logoImage from '../assets/logo.svg'
-import card from '../assets/card.svg'
 import { Blur } from '../components/Blur'
+import { Login } from './Login'
 
 interface IHomeProps {
   msg: string
@@ -9,26 +9,30 @@ interface IHomeProps {
 
 export function Rest({ msg }: IHomeProps) {
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="flex items-center w-screen h-screen justify-center">
       <Blur />
-      <div className="w-full mx-auto flex items-center justify-center flex-col gap-10 z-10">
-
-        <img className="pt-2" src={logoImage} alt="Logo" />
-
-        <div>
-          <h1 className="font-poppins font-bold text-8xl text-slate-100 w-auto">
-            {msg}
+      <div className="h-screen flex justify-center items-center w-5/6 z-10">
+        <div className="h-screen flex items-left flex-col justify-center">
+          <img
+            src={logoImage}
+            alt="logo da return bank"
+            className="max-w-xs absolute top-10"
+          />
+          <h1 className="text-zinc-800 text-7xl font-bold mb-10">
+            Olá! <br /> {msg}
           </h1>
+          <h3 className="text-zinc-800 font-bold text-2xl">
+            Horário de funcionamento
+          </h3>
+          <h5 className="text-zinc-400">
+            <b className="text-zinc-800">Segunda à sábado</b> (6:00 às 00:00){' '}
+            <br />
+            <b className="text-zinc-800">Domingos e feriados</b> (6:00 às 22:00)
+          </h5>
         </div>
-
-        <button
-          type="button"
-        >
-          <img src={card} alt="card" />
-        </button>
-
-        <div className="font-bold text-3xl text-slate-100">
-          Insira o cartão
+        <hr className="border border-purple-200 h-80 mx-10" />
+        <div className="h-screen flex items-center justify-center z-10">
+          <Login />
         </div>
       </div>
     </div>
