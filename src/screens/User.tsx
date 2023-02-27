@@ -10,17 +10,13 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyle from '../styles/global'
 import light from '../styles/themes/light'
 import dark from '../styles/themes/dark'
+import { LogoutButtom } from '../components/LogoutButtom';
 
 export function User() {
-  const id = window.location.href.split('/')[4]
+  const id = window.location.href.split('/').reverse()[0]
   const navigate = useNavigate()
-  const [name, setName] = useState('John Doe')
+  const [name, setName] = useState('')
   const [accounts, setAccounts] = useState([{ id: '0', type: '0', cash: '0' }])
-
-  const handleLogout = () => {
-    localStorage.removeItem('token')
-    navigate(`/`)
-  }
 
   useEffect(() => {
     if (localStorage.getItem('token') === null) {
@@ -37,7 +33,6 @@ export function User() {
         .catch((err) => {
           console.log(err)
         })
-      console.log(accounts)
     }
   }, [])
 
@@ -45,10 +40,10 @@ export function User() {
     <ThemeProvider theme={light}>
       <GlobalStyle />
       <div className="flex justify-center items-center">
-        <div className="z-10 h-screen w-screen absolute">
-          <Blur />
+        <div className="z-0 h-screen w-screen absolute">
+          <Blur/>
         </div>
-        <div className="h-screen flex flex-col items-center justify-center ">
+        <div className="h-screen flex flex-col items-center justify-center z-10">
           <img src={logoImage} alt="" className="h-20 mb-10" />
           <img src={profileImage} alt="" className="w-60" />
           <div className="mt-9">
@@ -81,12 +76,7 @@ export function User() {
             )
           })}
         </div>
-        <button
-          className="bg-red-500 p-2 z-20000 text-white rounded-md cursor-pointer"
-          onClick={handleLogout}
-        >
-          sair
-        </button>
+        <LogoutButtom />
       </div>
     </ThemeProvider>
   )

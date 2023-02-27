@@ -2,6 +2,7 @@ import '../styles/global.css'
 import logoImage from '../assets/logo.svg'
 import { Blur } from '../components/Blur'
 import { Login } from './Login'
+import { Salute } from '../components/Salute';
 
 interface IHomeProps {
   msg: string
@@ -18,14 +19,12 @@ export function Rest({ msg }: IHomeProps) {
             alt="logo da return bank"
             className="max-w-xs absolute top-10"
           />
-          <h1 className="text-zinc-800 text-7xl font-bold mb-10">
-            Olá! <br /> {msg}
-          </h1>
-          <h3 className="text-zinc-800 font-bold text-2xl">
+          <Salute />
+          <h3 className="text-zinc-800 font-bold text-2xl mb-2">
             Horário de funcionamento
           </h3>
           <h5 className="text-zinc-400">
-            <b className="text-zinc-800">Segunda à sábado</b> (6:00 às 00:00){' '}
+            <b className="text-zinc-800">Segunda à sábado</b> (6:00 às 00:00)
             <br />
             <b className="text-zinc-800">Domingos e feriados</b> (6:00 às 22:00)
           </h5>

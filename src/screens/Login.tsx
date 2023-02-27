@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Eye } from 'phosphor-react'
+import { Eye, EyeSlash } from 'phosphor-react'
+
 import api from '../api/api'
 
 export function Login() {
+  const navigate = useNavigate()
+
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
   const [hasValue, setHasValue] = useState(true)
 
-  const inputClass = hasValue ? '' : 'border-2 border-red-500 shadow-red-200'
+  // localStorage.addItem('id', id)
 
-  const navigate = useNavigate()
+  const inputClass = hasValue ? '' : 'border-2 border-red-500 shadow-red-200'
 
   const token = localStorage.getItem('token')
 
@@ -37,7 +40,8 @@ export function Login() {
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    if (id === '' || password === '') {
+    if (id === '' ||
+        password === '') {
       alert('Preencha todos os campos')
       setHasValue(false)
       return
@@ -63,6 +67,7 @@ export function Login() {
     ) as HTMLInputElement
     if (passwordInput.type === 'password') {
       passwordInput.type = 'text'
+
     } else {
       passwordInput.type = 'password'
     }
@@ -71,7 +76,7 @@ export function Login() {
   return (
     <form onSubmit={handleSubmit} className="p-10 flex flex-col">
       <h1 className="text-5xl font-bold text-zinc-800 mb-10">Área de Login</h1>
-      <label className="font-bold text-zinc-800">Número de ID</label>
+      <label className="font-bold text-zinc-800">Identificador</label>
       <input
         type="text"
         value={id}
@@ -79,7 +84,7 @@ export function Login() {
         className={`shadow-purple-200 p-4 pr-12 rounded-xl shadow-md w-full focus:outline-purple-400 ${inputClass}`}
         onChange={handleIdChange}
       />
-      <label className="font-bold text-zinc-800">Senha</label>
+      <label className="font-bold text-zinc-800 mt-3">Senha</label>
       <div className="flex">
         <input
           type="password"
@@ -89,12 +94,13 @@ export function Login() {
           className={`shadow-purple-200 p-4 pr-12 rounded-xl shadow-md w-full focus:outline-purple-400 ${inputClass}`}
           onChange={handlePasswordChange}
         />
-        <div className="flex items-center cursor-pointer">
-          <Eye
-            size={22}
-            className="-ml-10"
-            onClick={handlePasswordVisibilityToggle}
-          />
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={handlePasswordVisibilityToggle}>
+          <EyeSlash
+              size={22}
+              className="-ml-10"
+              onClick={handlePasswordVisibilityToggle}/>
         </div>
       </div>
       <button

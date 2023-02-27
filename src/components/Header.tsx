@@ -16,12 +16,12 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
   return (
     <div className="w-full px-36 flex justify-between z-10">
       <div>
-        <Link to={'/rest'}>
+        <Link to={'/'}>
           <img className="w-80" src={logoImage} alt="logo" />
         </Link>
       </div>
       <div className="self-center flex">
-        <Switch
+        {/* <Switch
           onChange={toggleTheme}
           checked={title == 'dark'}
           checkedIcon={false}
@@ -32,7 +32,7 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
           offColor={colors.secundary}
           onColor={shade(0.5, colors.primary)}
           boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-        />
+        /> */}
       </div>
     </div>
   )

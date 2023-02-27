@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { useEffect } from 'react';
 
 import { Rest } from './screens/Rest'
-import { Home } from './screens/Home'
+import { Account } from './screens/Account'
 import { Error } from './screens/Error'
 
-import { Deposit } from './screens/Deposit'
-import { Transfer } from './screens/Transfer'
-import { Withdrawal } from './screens/Withdrawal'
 import { User } from './screens/User'
+
 
 const router = createBrowserRouter([
   {
@@ -19,18 +18,17 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <Error />,
     children: [
-      { path: '/', element: <Rest msg={'Boa noite 🌙'} /> },
+      { path: '/', element: <Rest msg={'salute'} /> },
       { path: 'user/:id', element: <User /> },
-      { path: 'account/:id', element: <Home /> },
-      { path: 'deposit', element: <Deposit /> },
-      { path: 'transfer', element: <Transfer /> },
-      { path: 'withdrawal', element: <Withdrawal /> },
+      { path: 'account/:id', element: <Account /> },
     ],
   },
 ])
 
+
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </React.StrictMode>
 )

@@ -13,38 +13,47 @@ import light from '../styles/themes/light'
 import dark from '../styles/themes/dark'
 import api from '../api/api'
 
-import { accountUrl } from '../repositories/menuQuery'
 import { fm } from '../lib/formatMoney'
+import { LogoutButtom } from '../components/LogoutButtom'
 
-export function Home() {
-  const [theme, setTheme] = useState(dark)
-  const [name, setName] = useState('John Doe')
+
+export function Account() {
+  const [theme, setTheme] = useState(light)
+  const [name, setName] = useState('')
   const [cash, setCash]: any = useState('R$ 0,00')
 
+  const id = window.location.href.split('/').reverse()[0]
+
   const navigate = useNavigate()
+  const token = localStorage.getItem('token')
+
 
   const toggleTheme = () => {
     setTheme(theme.title == 'light' ? dark : light)
   }
 
-  const token = localStorage.getItem('token')
-
-  if (!token) {
-    navigate('/login')
-  }
-
   useEffect(() => {
-    api
-      .get(accountUrl)
+    if (token === null) {
+      navigate(`/`)
+    }
+    else {
+      api
+      .get(`http://192.168.0.41:3000/api/account/${id}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
       .then((response) => {
         setCash(fm.from(response.data[0].cash))
+        console.log(response.data)
 
         const userId = response.data[0].userId
 
         api
-          .get(`${api.defaults.baseURL}/user/${userId}`)
+          .get(`http://192.168.0.41:3000/api/user/${userId}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
           .then((response) => {
-            setName(response.data[0].name)
+            setName(response.data.name)
+            console.log(response.data)
           })
           .catch((err) => {
             console.log(err)
@@ -53,7 +62,9 @@ export function Home() {
       .catch((err) => {
         console.log(err)
       })
-  }, [])
+    }
+    }
+    , [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -72,15 +83,15 @@ export function Home() {
                 <blockquote className="font-bold text-zinc-500 text-lg">
                   Saldo em conta
                 </blockquote>
-                <h1 className="text-5xl font-bold text-zinc-300">{cash}</h1>
+                <h1 className="text-5xl font-bold text-zinc-800">{cash}</h1>
               </div>
 
               <div className="mt-9">
                 <blockquote className="text-2xl text-zinc-500 font-semibold">
                   Seja bem-vindo(a)
                 </blockquote>
-                <h1 className="text-5xl font-bold text-zinc-300">{name}</h1>
-                <p className="text-zinc-400 pt-4 text-left text-md w-80">
+                <h1 className="text-5xl font-bold text-zinc-800">{name}</h1>
+                <p className="text-zinc-500 pt-4 text-left text-md w-80">
                   <b>Atenção:</b> Selecione um botão ao lado para realizar
                   operações em sua conta bancária ✅
                 </p>
@@ -118,6 +129,7 @@ export function Home() {
             </div>
           </div>
         </div>
+        <LogoutButtom />
       </div>
     </ThemeProvider>
   )
