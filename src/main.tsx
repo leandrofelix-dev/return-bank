@@ -18,9 +18,26 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <Error />,
     children: [
-      { path: '/', element: <Rest msg={'salute'} /> },
-      { path: 'user/:id', element: <User /> },
-      { path: 'account/:id', element: <Account /> },
+      { path: '/', element:
+        <Rest msg={''} /> },
+      { path: 'user/:id', element:
+        <User /> },
+      { path: 'account/:id', element:
+        <Account
+          icon1={["SAQUE", "../src/assets/saque.svg"]}
+          icon2={["DEPÓSITO", "../src/assets/deposito.svg"]}
+          icon3={["TRANSFERÊNCIA", "../src/assets/transferencia.svg"]}
+          icon4={["VER MAIS", "../src/assets/mais.svg"]}
+        />
+      },
+      { path: 'account/:id/more', element:
+        <Account
+          icon1={["EXTRATO", "../src/assets/extrato.svg"]}
+          icon2={["CÂMBIO", "../src/assets/cambio.svg"]}
+          icon3={["SOBRE", "../src/assets/sobre.svg"]}
+          icon4={["VOLTAR", "../src/assets/voltar.svg"]}
+        />
+      },
     ],
   },
 ])

@@ -1,9 +1,9 @@
-export interface IButtomProps {
+export interface ITransactionButtomProps {
   logo: string
   text: string
   type: 'primary' | 'secondary'
 }
-export function Buttom({ logo, text, type }: IButtomProps) {
+export function TransactionButtom({ logo, text, type }: ITransactionButtomProps) {
   if (type === 'primary') {
     return (
       <button className="rounded-xl bg-purpleAlpha h-44 w-44 flex flex-col items-center justify-center">

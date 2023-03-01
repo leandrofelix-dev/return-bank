@@ -11,7 +11,6 @@ export function Login() {
   const [password, setPassword] = useState('')
   const [hasValue, setHasValue] = useState(true)
 
-  // localStorage.addItem('id', id)
 
   const inputClass = hasValue ? '' : 'border-2 border-red-500 shadow-red-200'
 
