@@ -1,7 +1,7 @@
 import '../styles/global.css'
 
 import { useEffect, useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useLocation } from 'react-router-dom'
 
 import { Blur } from '../components/Blur'
 import { TransactionButtom } from '../components/TransactionButtom'
@@ -28,23 +28,29 @@ export function Account({ icon1, icon2, icon3, icon4 }: iAccountProps) {
   const [name, setName] = useState('')
   const [cash, setCash]: any = useState('R$ 0,00')
 
-  const [addressAction, setaddressAction] = useState('')
+  const actualLocation = useLocation().pathname
 
-  const id = window.location.href.split('/').reverse()[0]
+  const [location, setLocation] = useState(actualLocation)
 
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
+
+  const accountId = actualLocation.split('/').reverse()[0]
 
   const toggleTheme = () => {
     setTheme(theme.title == 'light' ? dark : light)
   }
 
-  const handleToggleAdressAction = (address: string) => {
-    if (addressAction !== address) {
-      const address1 = `${window.location.href}/more`.split('/').reverse()
-      const address2 = `/${address1[2]}/${address1[1]}/${address1[0]}`
-      navigate(address2)
-      setaddressAction(window.location.href)
+    const handleToggleAdressAction = () => {
+    if (actualLocation == location) {
+      const goLocation = `${actualLocation}/more`
+      setLocation(goLocation)
+      navigate(location)
+    }
+    else {
+      const goLocation = `${actualLocation}`.replace('/more', '')
+      setLocation(goLocation)
+      navigate(location)
     }
   }
 
@@ -54,14 +60,12 @@ export function Account({ icon1, icon2, icon3, icon4 }: iAccountProps) {
     }
     else {
       api
-      .get(`http://192.168.0.41:3000/api/account/${id}`, {
+      .get(`http://192.168.0.41:3000/api/account/${accountId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
       .then((response) => {
         setCash(fm.from(response.data[0].cash))
-
         const userId = response.data[0].userId
-
         api
           .get(`http://192.168.0.41:3000/api/user/${userId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -110,35 +114,34 @@ export function Account({ icon1, icon2, icon3, icon4 }: iAccountProps) {
               </div>
             </div>
             <div className="grid grid-rows-2 grid-cols-2 gap-6 font-poppins">
-              <Link to={'/withdrawal'}>
+              <Link to={`${location}${icon1[2]}`}>
                 <TransactionButtom
                   text={icon1[0]}
                   logo={icon1[1]}
                   type="primary"
                 />
               </Link>
-              <Link to={'/deposit'}>
+              <Link to={`${location}${icon2[2]}`}>
                 <TransactionButtom
                   text={icon2[0]}
                   logo={icon2[1]}
                   type="primary"
                 />
               </Link>
-              <Link to={'/transfer'}>
+              <Link to={`${location}${icon3[2]}`}>
                 <TransactionButtom
                   text={icon3[0]}
                   logo={icon3[1]}
                   type="primary"
                 />
               </Link>
-              <div
-                onClick={() => handleToggleAdressAction('more')}>
-                <TransactionButtom
-                  text={icon4[0]}
-                  logo={icon4[1]}
-                  type="secondary"
-              />
-              </div>
+                <Link to={icon4[2]}>
+                  <TransactionButtom
+                    text={icon4[0]}
+                    logo={icon4[1]}
+                    type="secondary"
+                  />
+                </Link>
             </div>
           </div>
         </div>

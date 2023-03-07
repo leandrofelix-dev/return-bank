@@ -1,5 +1,5 @@
 import '../styles/global.css'
-import logoImage from '../assets/logo.svg'
+import logoImage from '../assets/logos/logo.svg'
 import { Blur } from '../components/Blur'
 import { Login } from './Login'
 import { Salute } from '../components/Salute';

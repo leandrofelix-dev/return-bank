@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { shade } from 'polished'
 
-import logoImage from '../assets/logo.svg'
+import logoImage from '../assets/logos/logo.svg'
 import { Link } from 'react-router-dom'
 
 interface Props {
