@@ -25,20 +25,10 @@ const router = createBrowserRouter([
         <User />
       },
       { path: 'account/:id', element:
-        <Account
-        icon1={["SAQUE", "http://localhost:5173/src/assets/icons/saque.svg", '/withdrawal']}
-        icon2={["DEPÓSITO", "http://localhost:5173/src/assets/icons/deposito.svg", '/deposit']}
-        icon3={["TRANSFERÊNCIA", "http://localhost:5173/src/assets/icons/transferencia.svg", '/transfer']}
-        icon4={["VER MAIS", "http://localhost:5173/src/assets/icons/mais.svg", '']}
-        />
+        <Account isMore={false} />
       },
       { path: 'account/:id/more', element:
-        <Account
-          icon1={["EXTRATO", "http://localhost:5173/src/assets/icons/extrato.svg", '/extract']}
-          icon2={["CÂMBIO", "http://localhost:5173/src/assets/icons/cambio.svg", '/exchange']}
-          icon3={["SOBRE", "http://localhost:5173/src/assets/icons/sobre.svg", '/about']}
-          icon4={["VOLTAR", "http://localhost:5173/src/assets/icons/voltar.svg", '']}
-        />
+        <Account isMore={true}/>
       },
       { path: 'account/:id/withdrawal', element:
         <Withdrawal />

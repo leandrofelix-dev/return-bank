@@ -13,17 +13,16 @@ import light from '../styles/themes/light'
 import dark from '../styles/themes/dark'
 import api from '../api/api'
 
+const local = 'http://localhost:5173/src/assets/icons/'
+
 import { fm } from '../lib/formatMoney'
 import { LogoutButtom } from '../components/LogoutButtom'
 
-interface iAccountProps {
-  icon1: string[]
-  icon2: string[]
-  icon3: string[]
-  icon4: string[]
+interface IAccountProps {
+  isMore: boolean
 }
 
-export function Account({ icon1, icon2, icon3, icon4 }: iAccountProps) {
+export function Account( { isMore }: IAccountProps) {
   const [theme, setTheme] = useState(light)
   const [name, setName] = useState('')
   const [cash, setCash]: any = useState('R$ 0,00')
@@ -41,24 +40,8 @@ export function Account({ icon1, icon2, icon3, icon4 }: iAccountProps) {
     setTheme(theme.title == 'light' ? dark : light)
   }
 
-    const handleToggleAdressAction = () => {
-    if (actualLocation == location) {
-      const goLocation = `${actualLocation}/more`
-      setLocation(goLocation)
-      navigate(location)
-    }
-    else {
-      const goLocation = `${actualLocation}`.replace('/more', '')
-      setLocation(goLocation)
-      navigate(location)
-    }
-  }
-
   useEffect(() => {
-    if (token === null) {
-      navigate(`/`)
-    }
-    else {
+    if (token === null) { navigate(`/`) }
       api
       .get(`http://192.168.0.41:3000/api/account/${accountId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -80,7 +63,6 @@ export function Account({ icon1, icon2, icon3, icon4 }: iAccountProps) {
       .catch((err) => {
         console.log(err)
       })
-    }
     }
     , [])
 
@@ -114,34 +96,38 @@ export function Account({ icon1, icon2, icon3, icon4 }: iAccountProps) {
               </div>
             </div>
             <div className="grid grid-rows-2 grid-cols-2 gap-6 font-poppins">
-              <Link to={`${location}${icon1[2]}`}>
-                <TransactionButtom
-                  text={icon1[0]}
-                  logo={icon1[1]}
-                  type="primary"
-                />
-              </Link>
-              <Link to={`${location}${icon2[2]}`}>
-                <TransactionButtom
-                  text={icon2[0]}
-                  logo={icon2[1]}
-                  type="primary"
-                />
-              </Link>
-              <Link to={`${location}${icon3[2]}`}>
-                <TransactionButtom
-                  text={icon3[0]}
-                  logo={icon3[1]}
-                  type="primary"
-                />
-              </Link>
-                <Link to={icon4[2]}>
-                  <TransactionButtom
-                    text={icon4[0]}
-                    logo={icon4[1]}
-                    type="secondary"
-                  />
-                </Link>
+              {
+                !isMore ? (
+                  <>
+                    <Link to={`${location}/withdrawal`}>
+                      <TransactionButtom type="primary" logo={local+'saque.svg'} text={'SAQUE'} />
+                    </Link>
+                    <Link to={`${location}/deposit`}>
+                      <TransactionButtom type="primary" logo={local+'deposito.svg'} text={'DEPOSITO'} />
+                    </Link>
+                    <Link to={`${location}/transfer`}>
+                      <TransactionButtom type="primary" logo={local+'transferencia.svg'} text={'TRANSFERÊNCIA'} />
+                    </Link>
+                    <Link to={`${location}/more`}>
+                      <TransactionButtom type="secondary" logo={local+'mais.svg'} text={'MAIS SERVIÇOS'} />
+                    </Link>
+                  </>) : (
+                    <>
+                      <Link to={`${location}/exchange`}>
+                        <TransactionButtom type="primary" logo={local+'cambio.svg'} text={'CÂMBIO'} />
+                      </Link>
+                      <Link to={`${location}/extract`}>
+                        <TransactionButtom type="primary" logo={local+'extrato.svg'} text={'EXTRATO'} />
+                      </Link>
+                      <Link to={`${location}/about`}>
+                        <TransactionButtom type="primary" logo={local+'sobre.svg'} text={'ABOUT'} />
+                      </Link>
+                      <Link to={location}>
+                        <TransactionButtom type="secondary" logo={local+'voltar.svg'} text={'VOLTAR'} />
+                      </Link>
+                    </>
+                  )
+              }
             </div>
           </div>
         </div>

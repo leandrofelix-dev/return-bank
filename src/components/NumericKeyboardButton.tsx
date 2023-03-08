@@ -1,6 +1,7 @@
 interface INumericKeyboardButton {
-  item: number | 'confirm' | 'cancel'
+  item: any
 }
+
 export function NumericKeyboardButton({ item }: INumericKeyboardButton) {
   switch (item) {
     case 'confirm':
