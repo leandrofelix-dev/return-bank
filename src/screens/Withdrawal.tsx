@@ -11,44 +11,47 @@ import { useNavigate } from "react-router-dom"
 
 export function Withdrawal() {
   const [value, setValue] = useState('')
-
   const [name, setName] = useState('John Doe')
 
   const keyboardValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'cancel', 0, 'confirm']
 
   const handleButtonKeyboardClick = (item: any) => {
     if (item === 'cancel') {
-      setValue(value.substring(0, value.length - 1))
+      setValue(value.substring(0, value.length + 1))
       return
     }
-    
+
     if (item === 'confirm') {
       api
         .post(`${api.defaults.baseURL}/transaction`, {
-          cash: Number(value),
-          accountId: "f3218ab7-2e1a-4f95-821d-0a8ec0095055",
+          cash: Number(value)*(-1),
+          accountId: accountId,
           type: "saque",
           description: ""
       })
         .then(function (res) {
-          console.log(res)
+          api.get(`${api.defaults.baseURL}/account/${accountId}`)
+          .then(function (res) {
+            alert(res.data)
+          })
+
+          alert(`Saque de R$${value} finalizado com sucesso!`)
+          setValue('')
+          navigate(`/account/${accountId}`)
+          return
         })
         .catch(function (err) {
           console.log(err)
         })
       alert('Aguarde um momento...')
 
-      setTimeout(() => {
-        setValue('')
-        alert('Saque finalizado com sucesso!')
-      }, 2000)
-      return
     }
     setValue(`${value}${item}`)
   }
   const token = localStorage.getItem('token')
 
   const accountId = window.location.href.split('/').reverse()[1]
+  console.log(accountId)
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -58,17 +61,18 @@ export function Withdrawal() {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
       .then((response) => {
+        const cash = response.data[0].cash
         const userId = response.data[0].userId
         api
-          .get(`http://192.168.0.41:3000/api/user/${userId}`, {
+        .get(`http://192.168.0.41:3000/api/user/${userId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
-          .then((response) => {
-            setName(response.data.name)
-          })
-          .catch((err) => {
-            console.log(err)
-          })
+        .then((response) => {
+          setName(response.data.name)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       })
       .catch((err) => {
         console.log(err)

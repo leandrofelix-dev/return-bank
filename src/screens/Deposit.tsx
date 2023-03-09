@@ -24,7 +24,7 @@ export function Deposit() {
     if (item === 'confirm') {
       api
         .post(`${api.defaults.baseURL}/transaction`, {
-          cash: Number(value),
+          cash: Number(value)*(+1),
           accountId: "f3218ab7-2e1a-4f95-821d-0a8ec0095055",
           type: "deposito",
           description: ""
@@ -40,6 +40,7 @@ export function Deposit() {
       setTimeout(() => {
         setValue('')
         alert('Deposito finalizado com sucesso!')
+        navigate(`/account/${accountId}`)
       }, 2000)
       return
     }
